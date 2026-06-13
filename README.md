@@ -1,5 +1,8 @@
 # Atomberg Video Support Platform
 
+> **Built by Vedant** — Atomberg hackathon finale.
+> **Live demo:** https://atombergvideo-150175342104.asia-south1.run.app · **Source:** https://github.com/vecvedant/Atomberg-Grand-Finale
+
 A self-owned, real-time **video support platform** for customer-support teams. An agent
 creates a session, shares an invite link, and the customer joins from a browser — both see
 and hear each other, chat, share files, and the agent can record the session for review.
@@ -103,6 +106,12 @@ Everything has sensible local defaults; copy `.env.example` to `.env` to overrid
 - [x] **Change camera / microphone** — in-call device picker, switches live
 - [x] **Resolution + feedback** — agent marks resolved / not resolved with notes; customer rates the call, says whether it was solved, and leaves a comment
 
+**Customer self-service**
+- [x] **Public intake form** — anyone raises a support request; it auto-routes to the least-busy manager, auto-computes warranty from the purchase date, and accepts an optional bill photo
+- [x] **Track a request** by reference code **or mobile number** — a live status timeline
+- [x] **Get on the line** (a live FIFO queue) **or schedule for later**; a waiting customer can even reschedule from the waiting room
+- [x] The Join button stays inactive until an agent actually picks the request up
+
 **Good-to-haves (all implemented)**
 - [x] **Call recording** — server-side WebM, status lifecycle (recording → processing → ready), downloadable
 - [x] **File sharing in chat** — images/PDF/docs, validated + access-controlled
@@ -124,6 +133,11 @@ Automated checks live in `scripts/` and run against a running server (`npm start
 | `node scripts/file-check.mjs`       | File upload, MIME rejection, share-in-chat, authorized download         |
 | `node scripts/reconnect-check.mjs`  | Drop + reconnect within grace → same slot, peer not notified            |
 | `node scripts/hierarchy-check.mjs`  | Admin/Manager/Agent rules, no admin-creation path, task pool accept, cross-pool isolation, performance stats, customer feedback |
+| `node scripts/intake-check.mjs`     | Public intake → auto-routing to least-busy manager, warranty compute, bill upload |
+| `node scripts/track-check.mjs`      | Track by reference + mobile number, privacy-safe live status |
+| `node scripts/queue-check.mjs`      | "Get on the line" live queue (FIFO) + the agent's live/scheduled split |
+| `node scripts/reschedule-check.mjs` | Schedule-for-later, including rescheduling from the waiting room |
+| `node scripts/backguard-check.mjs`  | Browser **Back** on a dashboard signs the user out; a refresh keeps the session |
 
 The browser tests use Puppeteer with `--use-fake-device-for-media-stream`, so they verify the
 real product path (browser ↔ server SFU) without a physical camera.
@@ -138,6 +152,18 @@ negotiation model, and the horizontal-scaling plan.
 Stack at a glance: **Node + TypeScript** (run via `tsx`, no build) · **Express** REST ·
 **Socket.IO** signaling/chat/presence · **werift** SFU · **node:sqlite** persistence ·
 **prom-client** metrics · vanilla-JS browser client (no build step).
+
+---
+
+## Deployment
+
+A `Dockerfile` is included, so the app deploys to **Google Cloud Run** in a few clicks — see
+**[DEPLOY-GCP.md](DEPLOY-GCP.md)** for the exact steps. Cloud Run runs the full app (pages,
+sign-in, dashboards, intake, tracking, chat, admin, metrics) over automatic HTTPS. **One
+caveat:** the live audio/video does **not** flow on Cloud Run, because serverless platforms
+only route HTTP/TCP and the SFU needs UDP — for the actual camera-to-camera call, run it
+locally (above) or on a VM with a public IP. The deployed link is great for showing the
+product; the local run is where the video works.
 
 ---
 
@@ -168,6 +194,12 @@ src/
   realtime/            Socket.IO signaling, presence, chat, SFU, recorder
   services/            session create/end/record helpers
   metrics/             Prometheus registry
-public/                vanilla-JS client (login, agent, customer, admin)
+public/                vanilla-JS client (landing, login, agent, manager, admin, customer, intake, track)
 scripts/               automated verification scripts
 ```
+
+---
+
+## Author
+
+Built by **Vedant** for the Atomberg hackathon finale.
