@@ -1,6 +1,7 @@
 # Atomberg Video Support Platform
 
 > **Created by Vedant Charegaonkar** — Atomberg hackathon finale.
+> **Demo video (Loom):** https://www.loom.com/share/d50dba236c1c438689e1cf0699c71f0f
 > **Live demo:** https://atombergvideo-150175342104.asia-south1.run.app · **Source:** https://github.com/vecvedant/Atomberg-Grand-Finale
 
 A self-owned, real-time **video support platform** for customer-support teams. An agent
