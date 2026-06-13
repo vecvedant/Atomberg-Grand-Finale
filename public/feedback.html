@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback — Atomberg Video Support</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="center-wrap">
+      <div class="card" id="formCard">
+        <div class="brand"><span class="dot"></span><strong>Atomberg Video Support</strong></div>
+        <h1>How was your support call?</h1>
+        <p class="muted">Your feedback helps us improve. This takes a few seconds.</p>
+
+        <div class="field mt">
+          <label>Rate your experience</label>
+          <div class="rating" id="rating">
+            <button type="button" data-val="1">1</button>
+            <button type="button" data-val="2">2</button>
+            <button type="button" data-val="3">3</button>
+            <button type="button" data-val="4">4</button>
+            <button type="button" data-val="5">5</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Was your problem solved?</label>
+          <div class="choice" id="solved">
+            <button type="button" data-val="1">Yes</button>
+            <button type="button" data-val="0">No</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="comment">Comments (optional)</label>
+          <textarea id="comment" class="area" placeholder="Tell us more"></textarea>
+        </div>
+
+        <button class="full" id="submitBtn">Submit feedback</button>
+        <div class="error-text" id="fbError"></div>
+      </div>
+
+      <div class="card hidden" id="thanksCard" style="text-align: center">
+        <div class="brand" style="justify-content: center"><span class="dot"></span><strong>Atomberg Video Support</strong></div>
+        <h1>Thank you</h1>
+        <p class="muted">Your feedback has been recorded. You can close this tab.</p>
+      </div>
+    </div>
+    <script type="module" src="/js/feedback.js"></script>
+  </body>
+</html>

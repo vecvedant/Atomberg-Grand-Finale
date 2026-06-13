@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request Support — Atomberg Video Support</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="page-head">
+      <div class="brand"><span class="dot"></span><strong>Atomberg Video Support</strong></div>
+      <div class="spacer"></div>
+      <a class="btn-ghost" href="/login.html">Sign in</a>
+    </header>
+
+    <!-- Request form + "what happens next" sidebar -->
+    <div class="intake-wrap" id="intakeWrap">
+      <div class="card" id="formCard">
+        <div class="h-icon">
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="13" height="12" rx="2" /><path d="M15 10l6-3v10l-6-3z" /></svg></span>
+          <h1>Raise a support request</h1>
+        </div>
+        <p class="muted">Tell us about the issue and we'll connect you to an agent over video.</p>
+
+        <div class="field mt">
+          <label for="name">Your name</label>
+          <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2" /><path d="M5 20a7 7 0 0 1 14 0" /></svg><input id="name" placeholder="e.g. John Doe" /></span>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="phone">Mobile number</label>
+            <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" /></svg><input id="phone" type="tel" placeholder="+91 98765 43210" /></span>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" /></svg><input id="email" type="email" placeholder="you@example.com" /></span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="problem">Describe your problem</label>
+          <textarea id="problem" class="area" placeholder="Please describe the issue in detail"></textarea>
+        </div>
+        <div class="field">
+          <label>When would you like the call?</label>
+          <div class="choice" id="when">
+            <button type="button" data-val="now" class="selected">Get on the line</button>
+            <button type="button" data-val="later">Schedule for later</button>
+          </div>
+        </div>
+        <div class="field hidden" id="scheduleField">
+          <label for="scheduleAt">Pick a date &amp; time</label>
+          <span class="input-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 9h18M8 3v4M16 3v4" /></svg><input id="scheduleAt" type="datetime-local" /></span>
+          <div class="field-hint">We'll line up an agent for around this time. You can join from your tracking page when they accept.</div>
+        </div>
+        <div class="field"><label for="purchaseDate">When did you buy the product?</label><input id="purchaseDate" type="date" /></div>
+        <div class="field">
+          <label>Is the product in warranty?</label>
+          <div class="choice" id="warranty">
+            <button type="button" data-val="yes">Yes</button>
+            <button type="button" data-val="no">No</button>
+            <button type="button" data-val="unsure">Not sure</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="bill">Bill / invoice photo (optional)</label>
+          <input id="bill" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" />
+          <div class="field-hint">Helps us verify your warranty faster. Images or PDF, optional.</div>
+        </div>
+
+        <button class="full" id="submitBtn">Submit request</button>
+        <div class="error-text" id="intakeError"></div>
+      </div>
+
+      <aside class="intake-side">
+        <h3>What happens next</h3>
+        <ol class="steps">
+          <li>You submit this request.</li>
+          <li>An available agent reviews and accepts it.</li>
+          <li>You join a live video call and get it resolved.</li>
+        </ol>
+        <p class="note-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg><span>Your details are used only to handle this support request.</span></p>
+        <p class="note-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v5h5" /><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /></svg><span>A bill photo is optional — it just helps us check your warranty faster.</span></p>
+      </aside>
+    </div>
+
+    <!-- Confirmation -->
+    <div class="center-wrap hidden" id="doneWrap">
+      <div class="card" id="doneCard" style="max-width: 480px; text-align: center">
+        <div class="brand" style="justify-content: center"><span class="dot"></span><strong>Atomberg Video Support</strong></div>
+        <h1>Request received</h1>
+        <p class="muted" id="doneMsg">We're connecting you to a support agent. Click below to join when you're ready.</p>
+        <div class="ref-chip" id="doneRef" style="margin: 14px auto 4px"></div>
+        <p class="muted">Save this reference to <a id="trackHere" href="/track.html">track your request</a> anytime.</p>
+        <a class="btn btn-brand full" id="joinLink" href="#" style="margin-top: 8px">Join the call</a>
+
+        <div class="sched-later hidden" id="schedLaterBox">
+          <button type="button" class="btn-ghost full" id="schedLaterBtn">No agent yet? Schedule for later</button>
+          <div class="sched-later-form hidden" id="schedLaterForm">
+            <div class="field mt"><label for="schedLaterInput">Pick a date &amp; time</label><input id="schedLaterInput" type="datetime-local" /></div>
+            <button type="button" class="btn btn-brand full" id="schedLaterConfirm">Schedule my call</button>
+            <div class="error-text" id="schedLaterErr"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/js/intake.js"></script>
+  </body>
+</html>

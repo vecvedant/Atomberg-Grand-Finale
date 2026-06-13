@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track your request — Atomberg Video Support</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="page-head">
+      <div class="brand"><span class="dot"></span><strong>Atomberg Video Support</strong></div>
+      <div class="spacer"></div>
+      <a class="btn-ghost" href="/login.html">Sign in</a>
+    </header>
+
+    <div class="center-wrap" style="align-items: flex-start; padding-top: 40px">
+      <div class="card" style="max-width: 460px">
+        <div class="h-icon">
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3-3" /></svg></span>
+          <h1>Track your request</h1>
+        </div>
+        <p class="muted">Enter your reference code or the mobile number you used.</p>
+
+        <form id="trackForm" class="mt">
+          <div class="field">
+            <label for="ref">Reference code or mobile number</label>
+            <input id="ref" placeholder="e.g. K7P2M9QX or +91 98765 43210" autocomplete="off" />
+          </div>
+          <button class="full" type="submit" id="trackBtn">Track request</button>
+          <div class="error-text" id="trackError"></div>
+        </form>
+
+        <div id="list" class="session-list hidden mt"></div>
+
+        <div id="result" class="hidden mt">
+          <div class="wf-row" style="border: none; padding: 0">
+            <span class="muted">Reference</span><span class="ref-chip" id="resRef"></span>
+          </div>
+          <p class="sched-note hidden" id="schedNote"></p>
+          <ul class="track-steps" id="timeline"></ul>
+          <a class="btn btn-brand full hidden" id="trackJoin" href="#" style="margin-top: 18px">Join the call</a>
+          <p class="muted mt hidden" id="trackHint"></p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/js/track.js"></script>
+  </body>
+</html>

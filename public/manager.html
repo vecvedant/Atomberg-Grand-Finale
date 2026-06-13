@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manager Console — Atomberg Video Support</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body>
+    <header class="admin-top">
+      <div class="brand"><span class="dot"></span><strong>Manager Console</strong></div>
+      <div class="spacer"></div>
+      <button class="secondary" id="changePwBtn">Change password</button>
+      <button class="secondary" id="logoutBtn">Sign out</button>
+    </header>
+
+    <main class="admin-main">
+      <section class="cards" id="mgrStats"></section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Create task</h2></div>
+        <div style="padding: 18px 20px">
+          <div class="field"><label for="taskTitle">Title</label><input id="taskTitle" placeholder="e.g. Fan installation help" /></div>
+          <div class="field"><label for="taskDesc">Describe the problem</label><textarea id="taskDesc" class="area" placeholder="What does the customer need help with?"></textarea></div>
+          <div class="field"><label for="taskSchedule">Suggested time (optional)</label><input id="taskSchedule" type="datetime-local" /></div>
+          <button id="createTaskBtn">Post task to my team</button>
+          <div class="error-text" id="taskError"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>My agents</h2><button id="addAgentBtn">Add agent</button></div>
+        <div id="agentList" class="session-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Tasks</h2></div>
+        <div id="taskList" class="session-list"></div>
+      </section>
+    </main>
+
+    <!-- Agent report drawer -->
+    <div id="drawer" class="drawer hidden">
+      <div class="drawer-inner">
+        <div class="drawer-head"><h2 id="drawerTitle">Agent report</h2><button class="secondary" id="drawerClose">Close</button></div>
+        <div id="drawerBody"></div>
+      </div>
+    </div>
+
+    <!-- Add agent modal -->
+    <div class="modal-overlay hidden" id="addAgentModal">
+      <div class="modal">
+        <h2>Add agent</h2>
+        <p class="muted">New agents join your pool and can accept your tasks.</p>
+        <div class="field mt"><label for="agUsername">Username</label><input id="agUsername" autocomplete="off" /></div>
+        <div class="field"><label for="agDisplay">Display name</label><input id="agDisplay" /></div>
+        <div class="field"><label for="agEmployeeId">Employee ID</label><input id="agEmployeeId" /></div>
+        <div class="field"><label for="agPhone">Mobile number</label><input id="agPhone" type="tel" /></div>
+        <div class="field"><label for="agEmail">Email</label><input id="agEmail" type="email" /></div>
+        <div class="field"><label for="agPassword">Temporary password</label><input id="agPassword" type="text" /></div>
+        <div class="error-text" id="agError"></div>
+        <div class="modal-actions"><button class="secondary" id="agCancel">Cancel</button><button id="agSave">Create</button></div>
+      </div>
+    </div>
+
+    <!-- Reset password modal -->
+    <div class="modal-overlay hidden" id="resetModal">
+      <div class="modal">
+        <h2>Reset password</h2>
+        <p class="muted" id="resetWho"></p>
+        <div class="field mt"><label for="resetPw">New password</label><input id="resetPw" type="text" /></div>
+        <div class="error-text" id="resetError"></div>
+        <div class="modal-actions"><button class="secondary" id="resetCancel">Cancel</button><button id="resetSave">Reset</button></div>
+      </div>
+    </div>
+
+    <!-- Change password modal -->
+    <div class="modal-overlay hidden" id="pwModal">
+      <div class="modal">
+        <h2>Change password</h2>
+        <div class="field mt"><label for="curPw">Current password</label><input id="curPw" type="password" /></div>
+        <div class="field"><label for="newPw">New password</label><input id="newPw" type="password" /></div>
+        <div class="error-text" id="pwError"></div>
+        <div class="modal-actions"><button class="secondary" id="pwCancel">Cancel</button><button id="pwSave">Save</button></div>
+      </div>
+    </div>
+
+    <script type="module" src="/js/manager.js"></script>
+  </body>
+</html>

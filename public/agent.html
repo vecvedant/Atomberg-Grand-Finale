@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Console — Atomberg Video Support</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <!-- Pre-call console -->
+    <div id="precall">
+      <header class="console-top">
+        <div class="brand"><span class="dot"></span><strong>Agent Console</strong></div>
+        <div class="spacer"></div>
+        <button class="secondary" id="changePwBtn">Change password</button>
+        <button class="secondary" id="logoutBtn">Sign out</button>
+      </header>
+
+      <main class="console-main">
+        <section class="panel-card">
+          <h2 id="agentGreeting">Your deliveries</h2>
+          <div class="stat-row" id="agentStats"></div>
+        </section>
+
+        <section class="panel-card">
+          <h2>Live queue <span class="count-badge" id="liveCount">0</span></h2>
+          <p class="muted" style="margin-top: -8px">Customers waiting on the line right now. Pick the one at the front.</p>
+          <div class="session-list" id="liveQueueList"><div class="empty-note">Loading…</div></div>
+        </section>
+
+        <section class="panel-card">
+          <h2>Scheduled requests</h2>
+          <p class="muted" style="margin-top: -8px">Booked for a specific time. Accept when you're ready to handle it.</p>
+          <div class="session-list" id="scheduledList"><div class="empty-note">Loading…</div></div>
+        </section>
+
+        <section class="panel-card">
+          <h2>My tasks</h2>
+          <div class="session-list" id="myList"><div class="empty-note">Loading…</div></div>
+        </section>
+      </main>
+    </div>
+
+    <!-- In-call -->
+    <div id="call" class="call hidden">
+      <header class="topbar">
+        <div class="brand"><span class="dot"></span><strong>Atomberg Support</strong></div>
+        <span class="pill" id="topStatus"><span class="led"></span>Connecting</span>
+        <span class="pill rec hidden" id="recPill"><span class="led"></span>Recording</span>
+        <div class="spacer"></div>
+        <span class="muted" id="sessionTitleLabel"></span>
+      </header>
+
+      <main class="stage" id="stage">
+        <div class="rec-banner hidden" id="recBanner"><span class="rec-mark"></span>This call is being recorded.</div>
+      </main>
+
+      <div class="controls">
+        <button class="ctl" id="btnMic" title="Mute / unmute">Mute</button>
+        <button class="ctl" id="btnCam" title="Camera on / off">Stop video</button>
+        <button class="ctl" id="btnDevices" title="Change camera or microphone">Devices</button>
+        <button class="ctl" id="btnRecord" title="Start / stop recording">Record</button>
+        <button class="danger" id="btnEnd" title="End session for everyone">End session</button>
+
+        <div class="device-panel hidden" id="devicePanel">
+          <h3>Camera &amp; microphone</h3>
+          <label class="muted" for="cameraSelect">Camera</label>
+          <select id="cameraSelect"></select>
+          <label class="muted" for="micSelect">Microphone</label>
+          <select id="micSelect"></select>
+        </div>
+      </div>
+
+      <aside class="side">
+        <section class="workflow">
+          <h3>Session</h3>
+          <div class="wf-row"><span class="label">Status</span><span class="value" id="wfStatus"><span class="status-dot grey"></span>—</span></div>
+          <div class="wf-row"><span class="label">Customer</span><span class="value" id="wfPeerName">Waiting</span></div>
+          <div class="wf-row"><span class="label">Mobile</span><span class="value" id="wfPeerPhone">—</span></div>
+          <div class="wf-row"><span class="label">Email</span><span class="value" id="wfPeerEmail">—</span></div>
+          <div class="wf-row"><span class="label">Purchased</span><span class="value" id="wfPurchase">—</span></div>
+          <div class="wf-row"><span class="label">Warranty</span><span class="value" id="wfWarranty">—</span></div>
+          <div class="wf-row"><span class="label">Bill</span><span class="value" id="wfBill">—</span></div>
+          <div class="wf-row"><span class="label">Duration</span><span class="value" id="wfDuration">00:00</span></div>
+          <div class="wf-row"><span class="label">Recording</span><span class="value" id="wfRecording"><span class="status-dot grey"></span>Not recording</span></div>
+        </section>
+
+        <section class="invite-box">
+          <span class="label">Invite link for the customer</span>
+          <div class="copy-row">
+            <input id="inviteUrl" readonly />
+            <button class="secondary" id="copyInvite">Copy</button>
+          </div>
+        </section>
+
+        <section class="chat">
+          <h3>Chat</h3>
+          <div class="messages" id="messages"></div>
+          <form class="composer" id="composerForm">
+            <button type="button" class="secondary" id="attachBtn" title="Share a file">Attach</button>
+            <input type="file" id="fileInput" class="hidden" />
+            <textarea id="composerInput" placeholder="Type a message" rows="1"></textarea>
+            <button type="submit">Send</button>
+          </form>
+        </section>
+      </aside>
+    </div>
+
+    <!-- Change password modal -->
+    <div class="modal-overlay hidden" id="pwModal">
+      <div class="modal">
+        <h2>Change password</h2>
+        <p class="muted">Update the password for your account.</p>
+        <div class="field mt"><label for="curPw">Current password</label><input id="curPw" type="password" /></div>
+        <div class="field"><label for="newPw">New password</label><input id="newPw" type="password" /></div>
+        <div class="error-text" id="pwError"></div>
+        <div class="modal-actions">
+          <button class="secondary" id="pwCancel">Cancel</button>
+          <button id="pwSave">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resolution modal (shown when the agent ends the session) -->
+    <div class="modal-overlay hidden" id="resModal">
+      <div class="modal">
+        <h2>Was the problem resolved?</h2>
+        <p class="muted">Record the outcome before ending the session.</p>
+        <div class="choice" id="resChoice">
+          <button data-val="1">Resolved</button>
+          <button data-val="0">Not resolved</button>
+        </div>
+        <div class="field mt"><label for="resNotes">Notes (optional)</label><textarea id="resNotes" class="area" placeholder="What was done / next steps"></textarea></div>
+        <div class="modal-actions">
+          <button class="secondary" id="resSkip">End without saving</button>
+          <button id="resSave">Save &amp; end</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/js/agent.js"></script>
+  </body>
+</html>

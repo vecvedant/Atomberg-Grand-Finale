@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard — Atomberg Video Support</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/admin.css" />
+  </head>
+  <body>
+    <header class="admin-top">
+      <div class="brand"><span class="dot"></span><strong>Operations Dashboard</strong></div>
+      <div class="spacer"></div>
+      <span class="pill live"><span class="led"></span>Live</span>
+      <button class="secondary" id="metricsBtn">Metrics</button>
+      <button class="secondary" id="logoutBtn">Sign out</button>
+    </header>
+
+    <main class="admin-main">
+      <section class="cards">
+        <div class="stat"><span class="stat-num" id="statManagers">0</span><span class="stat-label">Managers</span></div>
+        <div class="stat"><span class="stat-num" id="statAgents">0</span><span class="stat-label">Agents</span></div>
+        <div class="stat"><span class="stat-num" id="statActive">0</span><span class="stat-label">Active sessions</span></div>
+        <div class="stat"><span class="stat-num" id="statConnected">0</span><span class="stat-label">Connected now</span></div>
+        <div class="stat"><span class="stat-num" id="statTotal">0</span><span class="stat-label">Total sessions</span></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Managers &amp; performance</h2><button id="addManagerBtn">Add manager</button></div>
+        <div id="managerList" class="session-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Live sessions</h2><span class="muted" id="liveCount"></span></div>
+        <div id="liveSessions" class="session-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><h2>Session history</h2></div>
+        <div id="historySessions" class="session-list"></div>
+      </section>
+    </main>
+
+    <!-- Session detail drawer -->
+    <div id="drawer" class="drawer hidden">
+      <div class="drawer-inner">
+        <div class="drawer-head">
+          <h2 id="drawerTitle">Session</h2>
+          <button class="secondary" id="drawerClose">Close</button>
+        </div>
+        <div id="drawerBody"></div>
+      </div>
+    </div>
+
+    <!-- Metrics modal (readable view; raw Prometheus feed is at /metrics) -->
+    <div class="modal-overlay hidden" id="metricsModal">
+      <div class="modal" style="max-width: 540px">
+        <h2>Observability</h2>
+        <p class="muted">Live operational metrics.</p>
+        <div class="stat-row" id="metricsCards" style="margin: 16px 0"></div>
+        <div id="metricsBreakdown"></div>
+        <div class="modal-actions">
+          <button id="metricsClose" class="full">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add manager modal -->
+    <div class="modal-overlay hidden" id="addManagerModal">
+      <div class="modal">
+        <h2>Add manager</h2>
+        <p class="muted">Managers run their own agent pool. Only the admin can create managers.</p>
+        <div class="field mt"><label for="mgUsername">Username</label><input id="mgUsername" autocomplete="off" /></div>
+        <div class="field"><label for="mgDisplay">Display name</label><input id="mgDisplay" /></div>
+        <div class="field"><label for="mgEmployeeId">Employee ID</label><input id="mgEmployeeId" /></div>
+        <div class="field"><label for="mgPhone">Mobile number</label><input id="mgPhone" type="tel" /></div>
+        <div class="field"><label for="mgEmail">Email</label><input id="mgEmail" type="email" /></div>
+        <div class="field"><label for="mgPassword">Temporary password</label><input id="mgPassword" type="text" /></div>
+        <div class="error-text" id="mgError"></div>
+        <div class="modal-actions">
+          <button class="secondary" id="mgCancel">Cancel</button>
+          <button id="mgSave">Create manager</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset password modal -->
+    <div class="modal-overlay hidden" id="resetModal">
+      <div class="modal">
+        <h2>Reset password</h2>
+        <p class="muted" id="resetWho"></p>
+        <div class="field mt"><label for="resetPw">New password</label><input id="resetPw" type="text" /></div>
+        <div class="error-text" id="resetError"></div>
+        <div class="modal-actions">
+          <button class="secondary" id="resetCancel">Cancel</button>
+          <button id="resetSave">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/js/admin.js"></script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Sign In — Atomberg Video Support</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="split">
+      <section class="split-brand">
+        <div class="brand"><span class="dot"></span><strong>Atomberg Video Support</strong></div>
+        <div class="accent-rule"></div>
+        <h1>Staff portal</h1>
+        <p class="lead">Sign in to run support. Customers don't need an account — they join from a request link.</p>
+
+        <div class="features">
+          <div class="feature">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="13" height="12" rx="2" /><path d="M15 10l6-3v10l-6-3z" /></svg></span>
+            <div><div class="ft">Agents</div><div class="fd">Accept tasks and run the video calls.</div></div>
+          </div>
+          <div class="feature">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3" /><path d="M3 20a6 6 0 0 1 12 0" /><circle cx="17.5" cy="9" r="2.2" /><path d="M16 20a5 5 0 0 1 6-3.5" /></svg></span>
+            <div><div class="ft">Managers</div><div class="fd">Create tasks and track their agents.</div></div>
+          </div>
+          <div class="feature">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z" /><path d="M9 12l2 2 4-4" /></svg></span>
+            <div><div class="ft">Admins</div><div class="fd">Manage managers and review performance.</div></div>
+          </div>
+        </div>
+
+        <svg class="fan-motif" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+          <rect x="29" y="6" width="6" height="22" rx="3" />
+          <g transform="rotate(120 32 32)"><rect x="29" y="6" width="6" height="22" rx="3" /></g>
+          <g transform="rotate(240 32 32)"><rect x="29" y="6" width="6" height="22" rx="3" /></g>
+          <circle cx="32" cy="32" r="7" fill="#fffdf8" stroke="currentColor" stroke-width="3" />
+          <circle cx="32" cy="32" r="2.5" />
+        </svg>
+      </section>
+
+      <section class="split-main">
+        <div class="card">
+          <h1>Sign in</h1>
+          <p class="muted">Use your staff account.</p>
+
+          <form id="loginForm" class="mt">
+            <div class="field">
+              <label for="username">Username</label>
+              <input id="username" name="username" autocomplete="username" autofocus />
+            </div>
+            <div class="field">
+              <label for="password">Password</label>
+              <input id="password" name="password" type="password" autocomplete="current-password" />
+            </div>
+            <button class="full" type="submit" id="loginBtn">Sign in</button>
+            <div class="error-text" id="loginError"></div>
+            <p class="mt"><button type="button" class="link-btn" id="forgotBtn">Forgot password?</button></p>
+            <p class="muted hidden" id="forgotHelp">
+              Password resets are handled by your administrator. Ask an admin to reset it for you from the
+              Operations Dashboard. If you're signed in, you can change your own password from your console.
+            </p>
+          </form>
+
+          <div class="hint-box mt">
+            <strong>Demo accounts</strong><br />
+            Admin — <code>admin</code> / <code>admin123</code><br />
+            Manager — <code>manager</code> / <code>manager123</code><br />
+            Agent — <code>agent</code> / <code>agent123</code>
+          </div>
+          <p class="muted mt" style="text-align: center"><a href="/index.html">← Back</a></p>
+        </div>
+      </section>
+    </div>
+    <script type="module" src="/js/login.js"></script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join Support Call — Atomberg</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <!-- Pre-join: validate invite + collect name -->
+    <div id="prejoin" class="center-wrap">
+      <div class="card">
+        <div class="brand"><span class="dot"></span><strong>Atomberg Video Support</strong></div>
+        <h1 id="joinTitle">Join your support call</h1>
+        <p class="muted" id="joinSubtitle">Checking your invite…</p>
+
+        <div id="problemBox" class="hint-box hidden" style="margin-top: 14px">
+          <strong>What this call is about</strong>
+          <div id="problemText" style="margin-top: 6px; color: var(--text)"></div>
+        </div>
+
+        <div id="joinForm" class="hidden">
+          <div class="field mt">
+            <label for="displayName">Your name</label>
+            <input id="displayName" placeholder="e.g. John Doe" autofocus />
+          </div>
+          <div class="field">
+            <label for="phone">Mobile number</label>
+            <input id="phone" type="tel" placeholder="e.g. +91 98765 43210" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="e.g. you@example.com" />
+          </div>
+          <button id="joinBtn" class="full">Join call</button>
+          <p class="muted mt">You'll be asked to allow camera and microphone access.</p>
+        </div>
+
+        <div class="sched-later hidden" id="schedLaterBox">
+          <button type="button" class="btn-ghost full" id="schedLaterBtn">No agent yet? Schedule for later</button>
+          <div class="sched-later-form hidden" id="schedLaterForm">
+            <div class="field mt"><label for="schedLaterInput">Pick a date &amp; time</label><input id="schedLaterInput" type="datetime-local" /></div>
+            <button type="button" class="btn btn-brand full" id="schedLaterConfirm">Schedule my call</button>
+            <div class="error-text" id="schedLaterErr"></div>
+          </div>
+        </div>
+        <div class="error-text" id="joinError"></div>
+      </div>
+    </div>
+
+    <!-- In-call -->
+    <div id="call" class="call hidden">
+      <header class="topbar">
+        <div class="brand"><span class="dot"></span><strong>Atomberg Support</strong></div>
+        <span class="pill" id="topStatus"><span class="led"></span>Connecting</span>
+        <span class="pill rec hidden" id="recPill"><span class="led"></span>Recording</span>
+        <div class="spacer"></div>
+        <span class="muted" id="sessionTitleLabel"></span>
+      </header>
+
+      <main class="stage" id="stage">
+        <div class="rec-banner hidden" id="recBanner"><span class="rec-mark"></span>This call is being recorded by the support agent.</div>
+      </main>
+
+      <div class="controls">
+        <button class="ctl" id="btnMic" title="Mute / unmute">Mute</button>
+        <button class="ctl" id="btnCam" title="Camera on / off">Stop video</button>
+        <button class="ctl" id="btnDevices" title="Change camera or microphone">Devices</button>
+        <button class="danger" id="btnLeave" title="Leave the call">Leave</button>
+
+        <div class="device-panel hidden" id="devicePanel">
+          <h3>Camera &amp; microphone</h3>
+          <label class="muted" for="cameraSelect">Camera</label>
+          <select id="cameraSelect"></select>
+          <label class="muted" for="micSelect">Microphone</label>
+          <select id="micSelect"></select>
+        </div>
+      </div>
+
+      <aside class="side">
+        <section class="workflow">
+          <h3>Call</h3>
+          <div class="wf-row"><span class="label">Status</span><span class="value" id="wfStatus"><span class="status-dot grey"></span>—</span></div>
+          <div class="wf-row"><span class="label">Agent</span><span class="value" id="wfPeerName">Waiting</span></div>
+          <div class="wf-row"><span class="label">Duration</span><span class="value" id="wfDuration">00:00</span></div>
+          <div class="wf-row"><span class="label">Recording</span><span class="value" id="wfRecording"><span class="status-dot grey"></span>Not recording</span></div>
+        </section>
+
+        <section class="chat">
+          <h3>Chat</h3>
+          <div class="messages" id="messages"></div>
+          <form class="composer" id="composerForm">
+            <button type="button" class="secondary" id="attachBtn" title="Share a file">Attach</button>
+            <input type="file" id="fileInput" class="hidden" />
+            <textarea id="composerInput" placeholder="Type a message" rows="1"></textarea>
+            <button type="submit">Send</button>
+          </form>
+        </section>
+      </aside>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="/js/customer.js"></script>
+  </body>
+</html>
