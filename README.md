@@ -1,6 +1,6 @@
 # Atomberg Video Support Platform
 
-> **Built by Vedant** — Atomberg hackathon finale.
+> **Created by Vedant Charegaonkar** — Atomberg hackathon finale.
 > **Live demo:** https://atombergvideo-150175342104.asia-south1.run.app · **Source:** https://github.com/vecvedant/Atomberg-Grand-Finale
 
 A self-owned, real-time **video support platform** for customer-support teams. An agent
@@ -202,4 +202,4 @@ scripts/               automated verification scripts
 
 ## Author
 
-Built by **Vedant** for the Atomberg hackathon finale.
+Created by **Vedant Charegaonkar** for the Atomberg hackathon finale.
